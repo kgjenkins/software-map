@@ -8,13 +8,18 @@
 <script src="leaflet/leaflet-omnivore.min.js"></script>
 <script src="leaflet/awesomplete.min.js"></script>
 <style>
+
 h2 { margin:0 }
+
 #search { width:30% ; float:left }
-#results li:hover { text-decoration:underline ; cursor:pointer ; color:#f80 }
-#map { height: 90% }
 .awesomplete { z-index:99999 ; font-family: Arial ; font-size:80% }
 .awesomplete input { width:20em }
 .awesomplete mark { background:#fff ; font-weight:bold }
+
+#results li:hover { text-decoration:underline ; cursor:pointer ; color:#f80 }
+
+#map { height: 90% }
+
 </style>
 </head>
 
@@ -53,8 +58,10 @@ var customLayer = L.geoJson(null, {
 
     // set popup content
     var popup = '<h2>' + feature.properties.name1 + '</h2>';
-    popup += keywords.join(', ');
-    layer.bindPopup(popup);
+    popup += keywords.join(' - ');
+    layer.bindPopup(popup, {
+      minWidth: 400
+    });
   }
 });
 

@@ -10,6 +10,7 @@
 <style>
 h2 { margin:0 }
 #search { width:30% ; float:left }
+#results li:hover { text-decoration:underline ; cursor:pointer ; color:#f80 }
 #map { height: 90% }
 .awesomplete { z-index:99999 ; font-family: Arial ; font-size:80% }
 .awesomplete input { width:20em }
@@ -93,6 +94,11 @@ function search(e) {
       var name = item.feature.properties.name1;
       var li = document.createElement('li');
       li.innerHTML = name;
+      li.setAttribute('data', item._leaflet_id);
+      li.onclick = function(e){
+        var id = e.target.getAttribute('data')
+        map._layers[id].openPopup();
+      }
       results.appendChild(li);
     }
     else {

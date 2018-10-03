@@ -1,0 +1,107 @@
+<html>
+
+<head>
+<title>Cornell Software Map</title>
+<link rel="stylesheet" href="leaflet/leaflet.css" />
+<link rel="stylesheet" href="leaflet/awesomplete.css" />
+<script src="leaflet/leaflet.js"></script>
+<script src="leaflet/leaflet-omnivore.min.js"></script>
+<script src="leaflet/awesomplete.min.js"></script>
+<style>
+h2 { margin:0 }
+#search { width:30% ; float:left }
+#map { height: 90% }
+.awesomplete { z-index:99999 ; font-family: Arial ; font-size:80% }
+.awesomplete input { width:20em }
+.awesomplete mark { background:#fff ; font-weight:bold }
+</style>
+</head>
+
+<body>
+<div id='search'>
+  <h1>Public Computer Labs</h1>
+  Search for software: <input id='q' />
+  <ul id='results'></ul>
+</div>
+<div id='map'></div>
+
+<script>
+
+var map = L.map('map').setView([42.44752, -76.48108], 17);
+
+var osm_bw = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  minZoom: 1,
+  opacity: 0.6,
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+var softwares = [];
+
+var customLayer = L.geoJson(null, {
+  onEachFeature: function (feature, layer) {
+    // split keywords into array
+    var keywords = feature.properties.keywords.split(',');
+    //feature.properties.keywords = keywords;
+    for (let i=0; i<keywords.length; i++) {
+      var k = keywords[i];
+      if (softwares.indexOf(k) < 0) {
+        softwares.push(k);
+      }
+    }
+
+    // set popup content
+    var popup = '<h2>' + feature.properties.name1 + '</h2>';
+    popup += keywords.join(', ');
+    layer.bindPopup(popup);
+  }
+});
+
+var csv = omnivore.csv(
+  'labs.csv',
+  { latfield: 'lat', lonfield: 'lon' },
+  customLayer
+)
+.on('ready', function() {
+  // zoom to data
+  map.fitBounds(csv.getBounds());
+
+  // prepare autocomplete search
+  var q = document.getElementById('q');
+  new Awesomplete(q, {
+    list: softwares,
+    minChars: 1,
+    autoFirst: true
+  });
+  q.oninput = search;
+  q.onkeyup = search;
+})
+.addTo(map);;
+
+
+function search(e) {
+  var qterm = e.target.value;
+  var re = new RegExp(qterm, 'i');
+  var keys = Object.keys(csv._layers);
+  var results = document.getElementById('results');
+  results.innerHTML = '';
+  for (var i=0; i<keys.length; i++) {
+    var item = csv._layers[keys[i]];
+    if (item.feature.properties.keywords.match(re) ||
+        item.feature.properties.name1.match(re)) {
+      item.addTo(map);
+      var name = item.feature.properties.name1;
+      var li = document.createElement('li');
+      li.innerHTML = name;
+      results.appendChild(li);
+    }
+    else {
+      item.remove();
+    }
+  }
+}
+
+</script>
+
+</body>
+</html>

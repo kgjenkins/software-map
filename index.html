@@ -79,7 +79,7 @@ var csv = omnivore.csv(
 
 
 function search() {
-  var qterm = document.getElementById('q').value;
+  var qterm = document.getElementById('q').value.trim();
   var re = new RegExp(qterm, 'i');
   var keys = Object.keys(csv._layers);
   var results = document.getElementById('results');

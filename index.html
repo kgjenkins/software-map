@@ -64,9 +64,6 @@ var csv = omnivore.csv(
   customLayer
 )
 .on('ready', function() {
-  // zoom to data
-  map.fitBounds(csv.getBounds());
-
   // prepare autocomplete search
   var q = document.getElementById('q');
   new Awesomplete(q, {
@@ -76,16 +73,22 @@ var csv = omnivore.csv(
   });
   q.oninput = search;
   q.onkeyup = search;
+  search();
 })
 .addTo(map);;
 
 
-function search(e) {
-  var qterm = e.target.value;
+function search() {
+  var qterm = document.getElementById('q').value;
   var re = new RegExp(qterm, 'i');
   var keys = Object.keys(csv._layers);
   var results = document.getElementById('results');
+
+  // reset results, close any popups
   results.innerHTML = '';
+  map.closePopup();
+
+  var bounds = L.latLngBounds(csv._layers[keys[0]]);
   for (var i=0; i<keys.length; i++) {
     var item = csv._layers[keys[i]];
     if (item.feature.properties.keywords.match(re) ||
@@ -94,17 +97,25 @@ function search(e) {
       var name = item.feature.properties.name1;
       var li = document.createElement('li');
       li.innerHTML = name;
+
+      // expand bounds to include current point
+      bounds.extend(item.getLatLng());
+
+      // link to marker on map
       li.setAttribute('data', item._leaflet_id);
       li.onclick = function(e){
         var id = e.target.getAttribute('data')
-        map._layers[id].openPopup();
+        var item = map._layers[id].openPopup();
+        map.panTo(item.getLatLng());
       }
+
       results.appendChild(li);
     }
     else {
       item.remove();
     }
   }
+  map.fitBounds(bounds);
 }
 
 </script>

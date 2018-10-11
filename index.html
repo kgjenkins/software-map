@@ -89,11 +89,12 @@ var csv = omnivore.csv(
       var re = new RegExp('\\b'+qterm, 'i');
       return text.match(re);
     },
-    autoFirst: true
+    autoFirst: false
   });
   q.oninput = search;
   q.onkeyup = search;
   search();
+  q.focus();
 })
 .addTo(map);;
 

@@ -29,7 +29,7 @@ h2 { margin:0 }
 <body>
 <div id='search'>
   <h1>Public Computer Labs</h1>
-  Search for software: <input id='q' />
+  Search for software or location names: <input id='q' />
   <ul id='results'></ul>
 </div>
 <div id='map'></div>
@@ -108,7 +108,9 @@ function search() {
   for (var i=0; i<keys.length; i++) {
     var item = csv._layers[keys[i]];
     if (item.feature.properties.keywords.match(re) ||
-        item.feature.properties.name1.match(re)) {
+        item.feature.properties.name1.match(re) ||
+        item.feature.properties.name2.match(re)
+      ) {
       item.addTo(map);
       var name = item.feature.properties.name1;
       var li = document.createElement('li');

@@ -14,7 +14,7 @@ h2 { margin:0 }
 #search { width:20% ; float:left }
 .awesomplete { z-index:99999 ; font-family: Arial ; font-size:80% }
 .awesomplete input { width:20em }
-.awesomplete mark { background:#fff ; font-weight:bold }
+.awesomplete mark { background:none ! important ; font-weight:bold }
 
 #results li:hover { text-decoration:underline ; cursor:pointer ; color:#f80 }
 
@@ -85,6 +85,10 @@ var csv = omnivore.csv(
   new Awesomplete(q, {
     list: softwares,
     minChars: 1,
+    filter: function (text, qterm) {
+      var re = new RegExp('\\b'+qterm, 'i');
+      return text.match(re);
+    },
     autoFirst: true
   });
   q.oninput = search;
@@ -96,7 +100,8 @@ var csv = omnivore.csv(
 
 function search() {
   var qterm = document.getElementById('q').value.trim();
-  var re = new RegExp(qterm, 'i');
+  // we'll be searching for words that start with the user's query
+  var re = new RegExp('\\b'+qterm, 'i');
   var keys = Object.keys(csv._layers);
   var results = document.getElementById('results');
 
@@ -133,7 +138,8 @@ function search() {
       item.remove();
     }
   }
-  map.fitBounds(bounds);
+  // pad the bounds by 10% so that points aren't right on the edge of the map
+  map.fitBounds(bounds.pad(0.1));
 }
 
 </script>

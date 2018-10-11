@@ -10,8 +10,7 @@ The existing map, built around 2008, is at:
 http://mapping.cit.cornell.edu/publiclabs/map/
 
 
-
-
+## Data for the map
 
 Proposed attributes for each lab:
 
@@ -29,7 +28,7 @@ Proposed attributes for each lab:
 
 Here's an example of how this might look as JSON:
 
-```
+```json
 {
   "coordinates": [-76.476471, 42.448915],
   "name": "Mann Library - B30A PC Classroom",

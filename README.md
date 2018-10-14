@@ -1,7 +1,7 @@
 # software-map
 
 A prototype replacement for Cornell's public computer lab software map.
-This prototype uses Leaflet to create an interactive map using data from a .csv file:
+This prototype uses Leaflet to create an interactive map using data from a .geojson file:
 
 https://kgjenkins.github.io/software-map/
 
@@ -40,7 +40,7 @@ Here's an example of how this might look as GeoJSON:
     "access": "public",
     "admin": "CIT",
     "os": "Windows",
-    "description": "7 Dell Optiplex 990<br /> Intel Core i7 Core-2600<br /> 3.4 Ghz / 4 Gb Ram<br /> CD/DVD RW",
+    "description": "7 Dell Optiplex 990<br>Intel Core i7 Core-2600<br>3.4 Ghz / 4 Gb Ram<br>CD/DVD RW",
     "software": [
       "Adobe Acrobat Distiller",
       "Adobe Acrobat Professional",

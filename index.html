@@ -11,14 +11,17 @@
 
 h2 { margin:0 }
 
-#search { width:20% ; float:left }
+#search { width:20% ; float:left ; padding:0 1% }
 .awesomplete { z-index:99999 ; font-family: Arial ; font-size:80% }
 .awesomplete input { width:20em }
 .awesomplete mark { background:none ! important ; font-weight:bold }
 
 #results li:hover { text-decoration:underline ; cursor:pointer ; color:#f80 }
 
-#map { height: 90% }
+#info { width:30% ; padding:0 1% ; float:right }
+
+#map { height:100% ; width:46% }
+
 
 
 .keywords { margin-top:1em }
@@ -32,6 +35,7 @@ h2 { margin:0 }
   Search for software or location names: <input id='q' />
   <ul id='results'></ul>
 </div>
+<div id='info'></div>
 <div id='map'></div>
 <script>
 
@@ -65,11 +69,17 @@ var customLayer = L.geoJson(null, {
     if (hours.startsWith('http')) {
       hours = hours.replace(/(?!")(http\S+)/g, '<a href="$1">$1</a>');
     }
-    
+
     popup += '<div>Hours: ' + hours + '</div>';
     popup += '<div class="keywords">' + keywords.join(' - ') + '</div>';
-    layer.bindPopup(popup, {
-      minWidth: 400
+    feature.properties.popup = popup;
+    //layer.bindPopup(popup, {
+    //  minWidth: 400
+    //});
+    layer.on({
+      click: function(){
+        document.getElementById('info').innerHTML = popup;
+      }
     });
   }
 });
@@ -129,7 +139,9 @@ function search() {
       li.setAttribute('data', item._leaflet_id);
       li.onclick = function(e){
         var id = e.target.getAttribute('data')
-        var item = map._layers[id].openPopup();
+
+        // TODO don't access _layers -- private property
+        var item = map._layers[id].click();
         map.panTo(item.getLatLng());
       }
 

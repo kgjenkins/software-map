@@ -18,70 +18,62 @@ Proposed attributes for each lab:
 | - | - | - |
 | coordinates | point longitude, latitude | [-76.476471, 42.448915] |
 | name | common name of the lab | Mann B30A Classroom |
-| location | where the lab is located | Mann Library |
+| building | where the lab is located | Mann Library |
+| url | website URL | https://mannlib.cornell.edu/use/spaces/all/b30a |
 | hours | text or link for opening hours | Open 24/7<br>http://mannlib.cornell.edu/hours |
 | access | who can access the lab | public<br>restricted to AAP students |
 | description | about the lab | 44 Dell Desktops |
-| os | operating system(s) | Windows<br>Mac |
+| os | operating system(s) | Windows 10<br>Mac<br>macOS 10.4 Mojave |
 | admin | who runs the lab | CU Library<br>CIT |
 | software | names of sofware package available (versions optional) | Adobe Photoshop<br>QGIS<br>QGIS 3.2 |
 
-Here's an example of how this might look as JSON:
+Here's an example of how this might look as GeoJSON:
 
 ```json
 {
-  "coordinates": [-76.476471, 42.448915],
-  "name": "Mann Library - B30A PC Classroom",
-  "location": "B30A Mann Library",
-  "hours": "http://mannlib.cornell.edu/hours",
-  "access": "public",
-  "description": "44 Dell Desktops",
-  "os": "Windows",
-  "admin": "CU Library",
-  "software": [
-    "Adobe Acrobat Distiller",
-    "Adobe Acrobat Professional",
-    "Adobe Acrobat Reader",
-    "Adobe Bridge",
-    "Adobe Dreamweaver",
-    "Adobe Drive",
-    "Adobe ExtendScript Toolkit",
-    "Adobe Extension Manager",
-    "Adobe Fireworks",
-    "Adobe Flash Professional",
-    "Adobe Illustrator",
-    "Adobe InDesign",
-    "Adobe Media Encoder",
-    "Adobe Media Player",
-    "Adobe Photoshop",
-    "Adobe Premier Pro",
-    "ArcGIS 10.5.1",
-    "AutoCAD",
-    "Endnote",
-    "Google Earth",
-    "Google Sketchup",
-    "Jaws"
-    "Microsoft Access",
-    "Microsoft Excel",
-    "Microsoft InfoPath",
-    "Microsoft OneNote",
-    "Microsoft PowerPoint",
-    "Microsoft Publisher",
-    "Microsoft Word",
-    "Miktex",
-    "Net-Print Black and White",
-    "Net-Print Color",
-    "Premier AT",
-    "QGIS 3.2",
-    "R",
-    "Scanner",
-    "STATA/Intercooled",
-    "Stella",
-    "Tropcrop",
-    "VideoLAN",
-    "Windows Media Player"
-  ]
+  "type": "Feature",
+  "properties": {
+    "id": 793,
+    "name": "Willard Straight CIT Lab",
+    "building": "Willard Straight Hall",
+    "hours": "Open During Normal Building Hours.",
+    "access": "public",
+    "admin": "CIT",
+    "os": "Windows",
+    "description": "7 Dell Optiplex 990<br /> Intel Core i7 Core-2600<br /> 3.4 Ghz / 4 Gb Ram<br /> CD/DVD RW",
+    "software": [
+      "Adobe Acrobat Distiller",
+      "Adobe Acrobat Professional",
+      "Adobe Media Player",
+      "Audacity",
+      "Dr. Java",
+      "Google Earth",
+      "Google Sketchup",
+      "Microsoft Access",
+      "Microsoft Excel",
+      "Microsoft InfoPath",
+      "Microsoft OneNote",
+      "Microsoft PowerPoint",
+      "Microsoft Publisher",
+      "Microsoft Word",
+      "Miktex",
+      "Minitab",
+      "Net-Print Black and White",
+      "Net-Print Color",
+      "Netbeans IDE",
+      "Premier AT",
+      "Refworks",
+      "Scanner",
+      "SSH Secure Shell",
+      "Windows Media Player"
+    ]
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [ -76.485659, 42.446652 ]
+  }
 }
+
 ```
 
 

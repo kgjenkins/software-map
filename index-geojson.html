@@ -1,0 +1,206 @@
+<html>
+
+<head>
+<title>Cornell Software Map</title>
+<link rel="stylesheet" href="leaflet/leaflet.css" />
+<link rel="stylesheet" href="leaflet/awesomplete.css" />
+<script src="leaflet/leaflet.js"></script>
+<script src="leaflet/leaflet-omnivore.min.js"></script>
+<script src="leaflet/TileLayer.Grayscale.js"></script>
+<script src="leaflet/awesomplete.min.js"></script>
+<style>
+
+body { font-family:Roboto, Arial, sans-serif }
+
+h1 { margin:0 0 0.5em }
+h2 { margin:0 }
+
+#search { width:20% ; float:left ; padding:0 1% }
+.awesomplete { z-index:99999 ; font-family: Arial ; font-size:80% }
+.awesomplete > ul { xtransition:none ; background:rgba(240,240,240,1) }
+.awesomplete input { width:20em }
+.awesomplete mark { background:none ! important ; font-weight:bold }
+
+#results li:hover { text-decoration:underline ; cursor:pointer ; color:#f80 }
+
+#map { height:100% ; width:46% }
+
+#info { width:30% ; padding:0 1% ; float:right }
+
+</style>
+</head>
+
+<body>
+<div id='search'>
+  <h1>Public Computer Labs</h1>
+  Search for software or location names: <input id='q' />
+  <ul id='results'></ul>
+</div>
+<div id='info'></div>
+<div id='map'></div>
+<script>
+
+var map = L.map('map', { fadeAnimation:false })
+  .setMaxBounds([[42.41,-76.58],[42.49,-76.36]]);
+
+//var osm_bw = L.tileLayer.grayscale('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+var osm = L.tileLayer.grayscale('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  minZoom: 13,
+  opacity: 0.7,
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+
+var customLayer = L.geoJson(null, {
+  pointToLayer: function(point, latlng) {
+    return L.circleMarker(latlng, {
+      radius: 8,
+      color: '#000',
+      weight: 1,
+      fillOpacity: 0.5
+    });
+  },
+  style: function(feature) {
+    var color = feature.properties.os == 'Windows' ? '#44f' : '#f44';
+    return { fillColor: color };
+  },
+  onEachFeature: function(feature, layer) {
+    // calculate fulltext for searching
+    var f = '';
+    for (p in feature.properties) {
+      f += ' ' + feature.properties[p];
+    }
+    feature.properties.fulltext = f;
+    layer.on(
+      'click', function(e){
+        document.getElementById('info').innerHTML = infoHtml(e.target);
+      }
+    )
+  }
+});
+
+
+var labs = omnivore.geojson('labs.geojson', null, customLayer)
+  .on('ready', function() {
+    initAutocomplete(this.getLayers());
+  })
+  .addTo(map);
+
+function sort_no_case(a, b) {
+  var aa = a.toLowerCase();
+  var bb = b.toLowerCase();
+  if (aa<bb) return -1;
+  if (aa>bb) return 1;
+  return 0;
+}
+
+function initAutocomplete(layers) {
+  // build a list of all software, and use it to provide
+  // autocomplete for the search box
+  var all_software = [];
+  for (var j=0; j<layers.length; j++) {
+    var software = layers[j].feature.properties.software;
+    for (let i=0; i<software.length; i++) {
+      var s = software[i];
+      if (all_software.indexOf(s) < 0) {
+        all_software.push(s);
+      }
+    }
+  }
+  // this sort is not currrently used, since awesomplete reorders matches
+  all_software.sort(function(a,b){
+    var aa = a.toLowerCase();
+    var bb = b.toLowerCase();
+    if (aa<bb) return -1;
+    if (aa>bb) return 1;
+    return 0;
+  });
+  // add the autocomplete to the search box
+  var q = document.getElementById('q');
+  new Awesomplete(q, {
+    list: all_software,
+    minChars: 1,
+    filter: function (text, qterm) {
+      var re = new RegExp('\\b'+qterm, 'i');
+      return text.match(re);
+    },
+    autoFirst: false
+  });
+  // execute the search any time the input changes
+  q.addEventListener('awesomplete-selectcomplete', search);
+  q.oninput = search;
+  q.onkeyup = search; // just in case the browser doesn't support oninput
+  q.focus();
+  search();
+}
+
+function infoHtml(layer) {
+  // return info HTML for the layer feature
+  // TODO use mustache templates?
+  var p = layer.feature.properties;
+  var html = '<h2>' + p.name + '</h2>';
+  html += '<div>' + p.building + '</div>';
+  html += '<div>' + p.description + '</div>';
+  var hours = p.hours;
+  if (hours.startsWith('http')) {
+    hours = hours.replace(/(?!")(http\S+)/g, '<a href="$1">$1</a>');
+  }
+  html += '<div>Hours: ' + hours + '</div>';
+  if (p.software.length) {
+    html += '<div class="software"><ul><li>' + p.software.join('</li><li>') + '</li></ul></div>';
+  }
+  return html;
+}
+
+
+
+function search() {
+  var qterm = document.getElementById('q').value.trim();
+  // we'll be searching for words that start with the user's query
+  var re = new RegExp('\\b'+qterm, 'i');
+  // TODO don't access _layers -- private property
+  var keys = Object.keys(labs._layers);
+  var results = document.getElementById('results');
+
+  // reset results, close any popups
+  results.innerHTML = '';
+  map.closePopup();
+
+  // TODO don't access _layers -- private property
+  var bounds = L.latLngBounds(labs._layers[keys[0]]);
+  for (var i=0; i<keys.length; i++) {
+    var item = labs._layers[keys[i]];
+    if (item.feature.properties.fulltext.match(re)) {
+      item.addTo(map);
+      var name = item.feature.properties.name;
+      var li = document.createElement('li');
+      li.innerHTML = name;
+
+      // expand bounds to include current point
+      bounds.extend(item.getLatLng());
+
+      // link to marker on map
+      li.setAttribute('data', item._leaflet_id);
+      li.onclick = function(e){
+        var id = e.target.getAttribute('data')
+
+        // TODO don't access _layers -- private property
+        var item = map._layers[id].click();
+        map.panTo(item.getLatLng());
+      }
+
+      results.appendChild(li);
+    }
+    else {
+      item.remove();
+    }
+  }
+  // pad the bounds by 10% so that points aren't right on the edge of the map
+  map.fitBounds(bounds.pad(0.1));
+}
+
+</script>
+
+</body>
+</html>

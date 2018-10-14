@@ -193,7 +193,7 @@
         "access": "public",
         "admin": "CU Library",
         "os": "Mac",
-        "description": "40 Dell Windows PCs<br /> 18 IMacs<br> Public computing on the ground floor",
+        "description": "40 Dell Windows PCs<br /> 18 iMacs<br> Public computing on the ground floor",
         "software": [
           "Adobe Acrobat Distiller",
           "Adobe Acrobat Professional",
@@ -337,11 +337,12 @@
         "id": 999,
         "name": "Mann Library laptops",
         "building": "Mann Library",
+        "url": "http://mannlib.cornell.edu/use/technology/computing/laptops",
         "hours": "http://mannlib.cornell.edu/hours",
         "access": "public",
         "admin": "CU Library",
         "os": "Windows, Mac",
-        "description": "Mann Hours\\n mannlib.cornell.edu/hours\\n \\n Mann Laptop availability Laptops (20 MacBooks, 20 Dell)\\n mannlib.cornell.edu/use/technology/computing/laptops\\n \\n Mann Equipment Loans\\n mannlib.cornell.edu/equipment-software/equipment-loans\\n \\n  Mann Circulation Equipment List:\\n \\n Misc USB Cables.\\n \\n Mac -&gt; VGA adapters  Mac -&gt; HDMI adapters\\n \\n HDMI -&gt; VGA Adapter\\n \\n Calculators\\n \\n Dry erase marker sets\\n \\n GPS units (2)\\n \\n Still Cameras (7)\\n \\n Video cameras (8)\\n \\n Audio recorders (5)\\n \\n Wireless Mic Kit\\n \\n Projectors (2)\\n \\n Projection Screen (1)\\n \\n Umbrellas\\n \\n Power cords (mac &amp; 60w dell)\\n \\n Tripods (8)\\n \\n Mice\\n \\n Keyboards (1-2)",
+        "description": "Laptops (20 MacBooks, 20 Dell)<br> Mann Equipment Loans<br> mannlib.cornell.edu/equipment-software/equipment-loans<br>  Mann Circulation Equipment List:<br> Misc USB Cables.<br> Mac -&gt; VGA adapters  Mac -&gt; HDMI adapters<br> HDMI -&gt; VGA Adapter<br> Calculators<br> Dry erase marker sets<br> GPS units (2)<br> Still Cameras (7)<br> Video cameras (8)<br> Audio recorders (5)<br> Wireless Mic Kit<br> Projectors (2)<br> Projection Screen (1)<br> Umbrellas<br> Power cords (mac &amp; 60w dell)<br> Tripods (8)<br> Mice<br> Keyboards (1-2)",
         "software": [
           "Mac",
           "Adobe Acrobat Distiller",
@@ -1446,25 +1447,6 @@
     {
       "type": "Feature",
       "properties": {
-        "id": 1036,
-        "name": "Mann Library CIT Lab",
-        "building": "Mann Library",
-        "hours": "Open during normal building hours",
-        "access": "public",
-        "admin": "CIT",
-        "os": "Windows",
-        "description": "15 Optiplex 990",
-        "software": [
-        ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.476284, 42.448672 ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "id": 1042,
         "name": "Uris Library Kiosks",
         "building": "Uris Library",
@@ -1498,7 +1480,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [ -76.490202, 42.446351 ]
+        "coordinates": [ -76.489618, 42.448407 ]
       }
     },
     {

@@ -6,25 +6,32 @@
 <link rel="stylesheet" href="leaflet/awesomplete.css" />
 <script src="leaflet/leaflet.js"></script>
 <script src="leaflet/leaflet-omnivore.min.js"></script>
+<script src="leaflet/TileLayer.Grayscale.js"></script>
 <script src="leaflet/awesomplete.min.js"></script>
 <style>
 
-h2 { margin:0 }
+body { font-family:Roboto, Arial, sans-serif }
+
+h1 { margin:0 0 0.5em }
 
 #search { width:20% ; float:left ; padding:0 1% }
 .awesomplete { z-index:99999 ; font-family: Arial ; font-size:80% }
+.awesomplete > ul { transition:none ; background:rgba(255,255,255,1) }
 .awesomplete input { width:20em }
 .awesomplete mark { background:none ! important ; font-weight:bold }
 
-#results li:hover { text-decoration:underline ; cursor:pointer ; color:#f80 }
+#results a { text-decoration:none ; color:#44f }
+#results a:hover, #results a:focus { text-decoration:underline ; font-weight:bold }
+
+#map { height:95% ; width:46% }
 
 #info { width:30% ; padding:0 1% ; float:right }
+#info > h2 { margin:0 ; background:#f80 ; text-align:center }
+#info th { width:6em ; text-align:right ; color:#aaa ; vertical-align:top ; padding:3px }
+#info td { padding:3px }
+#info ul { margin:0 ; padding:0 ; list-style-type:none }
+#info ul li { margin:0 }
 
-#map { height:100% ; width:46% }
-
-
-
-.keywords { margin-top:1em }
 
 </style>
 </head>
@@ -39,61 +46,77 @@ h2 { margin:0 }
 <div id='map'></div>
 <script>
 
-var map = L.map('map').setMaxBounds([[42.41,-76.58],[42.49,-76.36]]);
+// fadeAnimation:false is recommended for grayscale tilelayer, otherwise it may flicker
+var map = L.map('map', { fadeAnimation:false })
+  .on('click', function(e) {
+    console.log(e.latlng);
+  })
+  .setMaxBounds([[42.41,-76.58],[42.49,-76.36]]);
 
-var osm_bw = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+// use a black-and-white openstreetmap basemap
+var osm = L.tileLayer.grayscale('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
   minZoom: 13,
-  opacity: 0.6,
+  opacity: 0.7,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-var softwares = [];
 
 var customLayer = L.geoJson(null, {
-  onEachFeature: function (feature, layer) {
-    // split keywords into array
-    var keywords = feature.properties.keywords.split(',');
-    //feature.properties.keywords = keywords;
-    for (let i=0; i<keywords.length; i++) {
-      var k = keywords[i];
-      if (softwares.indexOf(k) < 0) {
-        softwares.push(k);
-      }
+  // display as little circles
+  pointToLayer: function(point, latlng) {
+    return L.circleMarker(latlng);
+  },
+  style: function() {
+    return {
+      radius: 8,
+      color: '#fff',
+      fillColor: '#44f',
+      weight: 1,
+      fillOpacity:1
+    };
+  },
+  onEachFeature: function(feature, layer) {
+    // calculate fulltext for searching
+    var f = '';
+    for (p in feature.properties) {
+      f += ' ' + feature.properties[p];
     }
-
-    // set popup content
-    var popup = '<h2>' + feature.properties.name1 + '</h2>';
-    popup += '<div>' + feature.properties.description + '</div>';
-    var hours = feature.properties.hours;
-    if (hours.startsWith('http')) {
-      hours = hours.replace(/(?!")(http\S+)/g, '<a href="$1">$1</a>');
-    }
-
-    popup += '<div>Hours: ' + hours + '</div>';
-    popup += '<div class="keywords">' + keywords.join(' - ') + '</div>';
-    feature.properties.popup = popup;
-    //layer.bindPopup(popup, {
-    //  minWidth: 400
-    //});
-    layer.on({
-      click: function(){
-        document.getElementById('info').innerHTML = popup;
+    feature.properties.fulltext = f;
+    layer.on(
+      'click', function(e){
+        show_info(e.target);
       }
-    });
+    )
   }
 });
 
-var csv = omnivore.csv(
-  'labs.csv',
-  { latfield: 'lat', lonfield: 'lon' },
-  customLayer
-)
-.on('ready', function() {
-  // prepare autocomplete search
+
+var labs = omnivore.geojson('labs.geojson', null, customLayer)
+  .on('ready', function() {
+    initAutocomplete(this.getLayers());
+  })
+  .addTo(map);
+
+
+
+function initAutocomplete(layers) {
+  // build a list of all software, and use it to provide
+  // autocomplete for the search box
+  var all_software = [];
+  for (var j=0; j<layers.length; j++) {
+    var software = layers[j].feature.properties.software;
+    for (let i=0; i<software.length; i++) {
+      var s = software[i];
+      if (all_software.indexOf(s) < 0) {
+        all_software.push(s);
+      }
+    }
+  }
+  // add the autocomplete to the search box
   var q = document.getElementById('q');
   new Awesomplete(q, {
-    list: softwares,
+    list: all_software,
     minChars: 1,
     filter: function (text, qterm) {
       var re = new RegExp('\\b'+qterm, 'i');
@@ -101,47 +124,81 @@ var csv = omnivore.csv(
     },
     autoFirst: false
   });
+  // execute the search any time the input changes
+  q.addEventListener('awesomplete-selectcomplete', search);
   q.oninput = search;
-  q.onkeyup = search;
-  search();
+  q.onkeyup = search; // just in case the browser doesn't support oninput
   q.focus();
-})
-.addTo(map);;
+  search();
+}
+
+
+function show_info(layer) {
+  // return info HTML for the layer feature
+  // TODO use mustache templates?
+  var p = layer.feature.properties;
+  console.log(p);
+  var html = '<h2>' + p.name + '</h2>';
+  html += '<table>';
+  for (var i in Object.keys(p)) {
+    var property = Object.keys(p)[i];
+    if (['id','name','fulltext'].indexOf(property) > -1) {
+      continue;
+    }
+    var value = p[property];
+    if (typeof(value)=='string' && value.startsWith('http')) {
+      value = value.replace(/(?!")(http\S+)/g, '<a href="$1">$1</a>');
+    }
+    if (property=='software' && value.length>0) {
+      value= '<ul><li>' + p.software.join('</li><li>') + '</li></ul>';
+    }
+    html += '<tr><th>'+property+':</th><td>' + value + '</td></tr>';
+  }
+  html += '</table>';
+  document.getElementById('info').innerHTML = html;
+
+  // reset all markers
+  labs.eachLayer(function(el){
+    labs.resetStyle(el);
+  });
+
+  // highlight this marker
+  layer.setStyle({fillColor:'#f80', radius:15}).bringToFront();
+}
+
 
 
 function search() {
   var qterm = document.getElementById('q').value.trim();
-  // we'll be searching for words that start with the user's query
+  // note that query term must match beginning of a word
   var re = new RegExp('\\b'+qterm, 'i');
-  var keys = Object.keys(csv._layers);
+  var layers = labs.getLayers();
   var results = document.getElementById('results');
 
-  // reset results, close any popups
+  // reset results
   results.innerHTML = '';
-  map.closePopup();
+  document.getElementById('info').innerHTML = '';
 
-  var bounds = L.latLngBounds(csv._layers[keys[0]]);
-  for (var i=0; i<keys.length; i++) {
-    var item = csv._layers[keys[i]];
-    if (item.feature.properties.keywords.match(re) ||
-        item.feature.properties.name1.match(re) ||
-        item.feature.properties.name2.match(re)
-      ) {
+  var bounds = L.latLngBounds(layers[0]);
+  for (var i=0; i<layers.length; i++) {
+    var item = layers[i];
+    if (item.feature.properties.fulltext.match(re)) {
       item.addTo(map);
-      var name = item.feature.properties.name1;
+      var name = item.feature.properties.name;
       var li = document.createElement('li');
-      li.innerHTML = name;
+      li.innerHTML = '<a href="#">'+name+'</a>';
+      var a = li.firstChild;
 
       // expand bounds to include current point
       bounds.extend(item.getLatLng());
 
       // link to marker on map
-      li.setAttribute('data', item._leaflet_id);
-      li.onclick = function(e){
+      a.setAttribute('data', i);
+      a.onclick = a.onfocus = function(e){
         var id = e.target.getAttribute('data')
 
-        // TODO don't access _layers -- private property
-        var item = map._layers[id].click();
+        var item = layers[id];
+        show_info(item);
         map.panTo(item.getLatLng());
       }
 
@@ -150,6 +207,11 @@ function search() {
     else {
       item.remove();
     }
+  }
+  // automatically show details if there is only one match
+  if (results.childNodes.length == 1) {
+    a.focus();
+    q.focus();
   }
   // pad the bounds by 10% so that points aren't right on the edge of the map
   map.fitBounds(bounds.pad(0.1));

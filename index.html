@@ -90,11 +90,8 @@ var customLayer = L.geoJson(null, {
       f += ' ' + feature.properties[p];
     }
     feature.properties.fulltext = f;
-    layer.on(
-      'click', function(e){
-        show_info(e.target);
-      }
-    )
+    layer.bindTooltip(feature.properties.name);
+    layer.on('click', function(e){ show_info(e.target); });
   }
 });
 

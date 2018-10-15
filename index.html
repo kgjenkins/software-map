@@ -274,7 +274,7 @@ function search() {
 
   // pad the bounds by 10% so that points aren't right on the edge of the map
   if (bounds.isValid()) {
-    map.fitBounds(bounds.pad(0.1));
+    map.fitBounds(bounds.pad(0.03));
   }
 }
 

@@ -1935,6 +1935,58 @@
         "type": "Point",
         "coordinates": [ -76.480173, 42.452167 ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9999,
+        "name": "CISER Computing Accounts",
+        "building": null,
+        "hours": "24/7",
+        "access": "via Remote Desktop",
+        "admin": "CISER",
+        "os": "Windows",
+        "description": "31 Dell Desktops",
+        "software": [
+          "ActivePerl",
+          "Adobe Acrobat Pro",
+          "AMOS",
+          "ArcGIS",
+          "Atlas.ti",
+          "EndNote",
+          "IBM SPSS",
+          "JMP",
+          "LaTeX Editor (LEd)",
+          "Mathematica",
+          "Matlab",
+          "Microsoft Access",
+          "Microsoft Excel",
+          "Microsoft PowerPoint",
+          "Microsoft Word",
+          "MiKTeX",
+          "Minitab",
+          "MPLUS",
+          "Notepad++",
+          "Python",
+          "QSR NVivo",
+          "R",
+          "Rscript",
+          "RStudio",
+          "SAS",
+          "SAS Data Quality Server",
+          "SAS Enterprise Guide",
+          "Scientific Workplace",
+          "Stat Transfer",
+          "Stata MP",
+          "TortoiseSVN",
+          "Visual Studio 2008 C++"
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 0, 0 ]
+      }
     }
   ]
 }
+

@@ -122,6 +122,15 @@ function initAutocomplete(layers) {
       }
     }
   }
+  // sort software by name, case-insensitive
+  all_software.sort(function(a,b){
+    var aa = a.toLowerCase();
+    var bb = b.toLowerCase();
+    if (aa<bb) return -1;
+    if (aa>bb) return 1;
+    return 0;
+  });
+
   console.log(all_software);
   // add the autocomplete to the search box
   var q = document.getElementById('q');

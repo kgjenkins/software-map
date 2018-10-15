@@ -241,8 +241,16 @@ function search() {
 
       // link to marker on map
       a.setAttribute('data', i);
+      a.onmouseover = function(e){
+        var id = e.target.getAttribute('data');
+        layers[id].openTooltip();
+      }
+      a.onmouseout = function(e){
+        var id = e.target.getAttribute('data');
+        layers[id].closeTooltip();
+      }
       a.onclick = a.onfocus = function(e){
-        var id = e.target.getAttribute('data')
+        var id = e.target.getAttribute('data');
 
         var item = layers[id];
         show_info(item);

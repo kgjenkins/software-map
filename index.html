@@ -20,13 +20,13 @@ h1 { margin:0 0 0.5em }
 .awesomplete input { width:20em }
 .awesomplete mark { background:none ! important ; font-weight:bold }
 
-#results a { text-decoration:none ; color:#44f }
+#results a { text-decoration:none ; color:#b31b1b }
 #results a:hover, #results a:focus { text-decoration:underline ; font-weight:bold }
 
 #map { height:95% ; width:46% }
 
 #info { width:30% ; padding:0 1% ; float:right }
-#info > h2 { margin:0 ; background:#f80 ; text-align:center }
+#info > h2 { margin:0 ; background:#ff0 ; text-align:center }
 #info th { width:6em ; text-align:right ; color:#aaa ; vertical-align:top ; padding:3px }
 #info td { padding:3px }
 #info ul { margin:0 ; padding:0 ; list-style-type:none }
@@ -38,8 +38,8 @@ h1 { margin:0 0 0.5em }
 
 <body>
 <div id='search'>
-  <h1>Public Computer Labs</h1>
-  Search for software or location names: <input id='q' />
+  <h1>Cornell Software Map</h1>
+  Search for software o n the Cornell campus: <input id='q' />
   <ul id='results'></ul>
 </div>
 <div id='info'></div>
@@ -57,7 +57,7 @@ var map = L.map('map', { fadeAnimation:false })
 var osm = L.tileLayer.grayscale('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
   minZoom: 13,
-  opacity: 0.7,
+  opacity: 0.5,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
@@ -71,7 +71,7 @@ var customLayer = L.geoJson(null, {
     return {
       radius: 8,
       color: '#fff',
-      fillColor: '#44f',
+      fillColor: '#b31b1b',
       weight: 1,
       fillOpacity:1
     };
@@ -163,7 +163,7 @@ function show_info(layer) {
   });
 
   // highlight this marker
-  layer.setStyle({fillColor:'#f80', radius:15}).bringToFront();
+  layer.bringToFront().setStyle({fillColor:'#ff0', color:'#000', radius:12});
 }
 
 
@@ -178,6 +178,10 @@ function search() {
   // reset results
   results.innerHTML = '';
   document.getElementById('info').innerHTML = '';
+  // reset all markers
+  labs.eachLayer(function(el){
+    labs.resetStyle(el);
+  });
 
   var bounds = L.latLngBounds(layers[0]);
   for (var i=0; i<layers.length; i++) {

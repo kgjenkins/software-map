@@ -39,7 +39,7 @@ h1 { margin:0 0 0.5em }
 <body>
 <div id='search'>
   <h1>Cornell Software Map</h1>
-  Search for software o n the Cornell campus: <input id='q' />
+  Search for software on the Cornell campus: <input id='q' />
   <ul id='results'></ul>
 </div>
 <div id='info'></div>
@@ -92,13 +92,18 @@ var customLayer = L.geoJson(null, {
 });
 
 
+
 var labs = omnivore.geojson('labs.geojson', null, customLayer)
   .on('ready', function() {
     initAutocomplete(this.getLayers());
   })
   .addTo(map);
 
-
+document.onkeyup = function(e) {
+  if (e.key=='Escape') {
+    clear_info();
+  }
+}
 
 function initAutocomplete(layers) {
   // build a list of all software, and use it to provide
@@ -136,8 +141,8 @@ function initAutocomplete(layers) {
 function show_info(layer) {
   // return info HTML for the layer feature
   // TODO use mustache templates?
+  clear_info();
   var p = layer.feature.properties;
-  console.log(p);
   var html = '<h2>' + p.name + '</h2>';
   html += '<table>';
   for (var i in Object.keys(p)) {
@@ -157,16 +162,18 @@ function show_info(layer) {
   html += '</table>';
   document.getElementById('info').innerHTML = html;
 
-  // reset all markers
-  labs.eachLayer(function(el){
-    labs.resetStyle(el);
-  });
-
   // highlight this marker
   layer.bringToFront().setStyle({fillColor:'#ff0', color:'#000', radius:12});
 }
 
 
+function clear_info() {
+  document.getElementById('info').innerHTML = '';
+  // reset all markers
+  labs.eachLayer(function(el){
+    labs.resetStyle(el);
+  });
+}
 
 function search() {
   var qterm = document.getElementById('q').value.trim();
@@ -177,11 +184,7 @@ function search() {
 
   // reset results
   results.innerHTML = '';
-  document.getElementById('info').innerHTML = '';
-  // reset all markers
-  labs.eachLayer(function(el){
-    labs.resetStyle(el);
-  });
+  clear_info();
 
   var bounds = L.latLngBounds(layers[0]);
   for (var i=0; i<layers.length; i++) {

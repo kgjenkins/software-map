@@ -54,7 +54,7 @@ var map = L.map('map', { fadeAnimation:false })
   .setMaxBounds([[42.41,-76.58],[42.49,-76.36]]);
 
 // use a black-and-white openstreetmap basemap
-var osm = L.tileLayer.grayscale('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+var osm = L.tileLayer.grayscale('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
   minZoom: 13,
   opacity: 0.5,

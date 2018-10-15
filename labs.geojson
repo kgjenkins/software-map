@@ -1949,6 +1949,7 @@
         "os": "Windows",
         "description": "CISER provides research computing accounts in a Windows remote-access environment with a wide range of statistical and research software available.  These resources are available to current Cornell faculty researchers, students, staff and collaborators, for research and academic use only, based on member college approval.  <a href='https://ciser.cornell.edu/computing/request-an-account/'>Request a CISER account</a>",
         "software": [
+          "7-Zip",
           "ActivePerl",
           "Adobe Acrobat Pro",
           "AMOS",

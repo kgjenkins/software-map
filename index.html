@@ -129,7 +129,7 @@ function initAutocomplete(layers) {
     },
     autoFirst: false
   });
-  // execute the search any time the input changes
+  // execute the search whenever the input changes
   q.addEventListener('awesomplete-selectcomplete', search);
   q.oninput = search;
   q.onkeyup = search; // just in case the browser doesn't support oninput
@@ -147,16 +147,28 @@ function show_info(layer) {
   html += '<table>';
   for (var i in Object.keys(p)) {
     var property = Object.keys(p)[i];
+
+    // don't show these fields
     if (['id','name','fulltext'].indexOf(property) > -1) {
       continue;
     }
     var value = p[property];
+
+    // don't list null or blank properties
+    if (value === null || value === '') {
+      continue;
+    }
+
+    // linkify things that look like links
     if (typeof(value)=='string' && value.startsWith('http')) {
       value = value.replace(/(?!")(http\S+)/g, '<a href="$1">$1</a>');
     }
+
+    // use html list for software values
     if (property=='software' && value.length>0) {
       value= '<ul><li>' + p.software.join('</li><li>') + '</li></ul>';
     }
+
     html += '<tr><th>'+property+':</th><td>' + value + '</td></tr>';
   }
   html += '</table>';
@@ -186,18 +198,24 @@ function search() {
   results.innerHTML = '';
   clear_info();
 
-  var bounds = L.latLngBounds(layers[0]);
+  var lastMatch = null;
+  var bounds = L.latLngBounds();
   for (var i=0; i<layers.length; i++) {
     var item = layers[i];
     if (item.feature.properties.fulltext.match(re)) {
+      lastMatch = item;
       item.addTo(map);
+
+      var ll = item.getLatLng();
+      if (ll.lat != 0 || ll.lng != 0) {
+        // expand bounds to include current point
+        bounds.extend(item.getLatLng());
+      }
+
       var name = item.feature.properties.name;
       var li = document.createElement('li');
       li.innerHTML = '<a href="#">'+name+'</a>';
       var a = li.firstChild;
-
-      // expand bounds to include current point
-      bounds.extend(item.getLatLng());
 
       // link to marker on map
       a.setAttribute('data', i);
@@ -206,7 +224,11 @@ function search() {
 
         var item = layers[id];
         show_info(item);
-        map.panTo(item.getLatLng());
+
+        var ll = item.getLatLng();
+        if (ll.lat != 0 || ll.lng != 0) {
+          map.panTo(ll);
+        }
       }
 
       results.appendChild(li);
@@ -217,11 +239,13 @@ function search() {
   }
   // automatically show details if there is only one match
   if (results.childNodes.length == 1) {
-    a.focus();
-    q.focus();
+    show_info(lastMatch);
   }
+
   // pad the bounds by 10% so that points aren't right on the edge of the map
-  map.fitBounds(bounds.pad(0.1));
+  if (bounds.isValid()) {
+    map.fitBounds(bounds.pad(0.1));
+  }
 }
 
 </script>

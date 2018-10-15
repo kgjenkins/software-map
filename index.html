@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="leaflet/awesomplete.css" />
 <script src="leaflet/leaflet.js"></script>
 <script src="leaflet/leaflet-omnivore.min.js"></script>
-<script src="leaflet/TileLayer.Grayscale.js"></script>
+<script src="leaflet/leaflet-tilelayer-colorfilter.min.js"></script>
 <script src="leaflet/awesomplete.min.js"></script>
 <style>
 
@@ -15,6 +15,7 @@ body { font-family:Roboto, Arial, sans-serif }
 h1 { margin:0 0 0.5em }
 
 #search { width:20% ; float:left ; padding:0 1% }
+#q { width:12em }
 .awesomplete { z-index:99999 ; font-family: Arial ; font-size:80% }
 .awesomplete > ul { transition:none ; background:rgba(255,255,255,1) }
 .awesomplete input { width:20em }
@@ -53,12 +54,18 @@ var map = L.map('map', { fadeAnimation:false })
   })
   .setMaxBounds([[42.41,-76.58],[42.49,-76.36]]);
 
-// use a black-and-white openstreetmap basemap
-var osm = L.tileLayer.grayscale('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// use a openstreetmap basemap
+var osm = L.tileLayer.colorFilter('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   minZoom: 14,
   opacity: 0.5,
-  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  filter: [
+    'hue:180deg',
+    'invert:100%',
+    'saturate:20%',
+    'brightness:200%'
+  ]
 }).addTo(map);
 
 
@@ -70,7 +77,7 @@ var customLayer = L.geoJson(null, {
   style: function() {
     return {
       radius: 8,
-      color: '#fff',
+      color: '#eee',
       fillColor: '#b31b1b',
       weight: 1,
       fillOpacity:1

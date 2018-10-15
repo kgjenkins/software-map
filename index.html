@@ -192,6 +192,14 @@ function search() {
   // note that query term must match beginning of a word
   var re = new RegExp('\\b'+qterm, 'i');
   var layers = labs.getLayers();
+  // sort by name
+  layers.sort(function(a,b){
+    var aa = a.feature.properties.name;
+    var bb = b.feature.properties.name;
+    if (aa<bb) return -1;
+    if (aa>bb) return 1;
+    return 0;
+  });
   var results = document.getElementById('results');
 
   // reset results

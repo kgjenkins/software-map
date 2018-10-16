@@ -10,12 +10,12 @@
 <script src="leaflet/awesomplete.min.js"></script>
 <style>
 
-body { font-family:Roboto, Arial, sans-serif }
+body { font-family:"Segoe UI", Roboto, Arial, sans-serif }
 
 h1 { margin:0 0 0.5em }
 
-#search { width:20% ; float:left ; padding:0 1% }
-#q { width:12em }
+#search { width:25% ; float:left ; padding:0 1% }
+#q { width:16em }
 .awesomplete { z-index:99999 ; font-family: Arial ; font-size:80% }
 .awesomplete > ul { transition:none ; background:rgba(255,255,255,1) }
 .awesomplete input { width:20em }
@@ -24,9 +24,9 @@ h1 { margin:0 0 0.5em }
 #results a { text-decoration:none ; color:#b31b1b }
 #results a:hover, #results a:focus { text-decoration:underline ; font-weight:bold }
 
-#map { height:95% ; width:46% }
+#map { height:95% ; width:40% }
 
-#info { width:30% ; padding:0 1% ; float:right }
+#info { width:31% ; padding:0 1% ; float:right }
 #info > h2 { margin:0 ; background:#ff0 ; text-align:center }
 #info th { width:6em ; text-align:right ; color:#aaa ; vertical-align:top ; padding:3px }
 #info td { padding:3px }
@@ -40,7 +40,8 @@ h1 { margin:0 0 0.5em }
 <body>
 <div id='search'>
   <h1>Cornell Software Map</h1>
-  Search for software on the Cornell campus: <input id='q' />
+  Search: for software at Cornell:<br>
+  <input id='q' />
   <ul id='results'></ul>
 </div>
 <div id='info'></div>
@@ -52,7 +53,7 @@ var map = L.map('map', { fadeAnimation:false })
   .on('click', function(e) {
     console.log(e.latlng);
   })
-  .setMaxBounds([[42.41,-76.58],[42.49,-76.36]]);
+  .setMaxBounds([[42.4328,-76.4996], [42.4674,-76.4478]]);
 
 // use a openstreetmap basemap
 var osm = L.tileLayer.colorFilter('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
@@ -89,7 +90,7 @@ var customLayer = L.geoJson(null, {
       f += ' ' + feature.properties[p];
     }
     feature.properties.fulltext = f;
-    layer.bindTooltip(feature.properties.name);
+    layer.bindTooltip(feature.properties.name, {direction:'right'});
     layer.on('click', function(e){ show_info(e.target); });
   }
 });
@@ -207,8 +208,8 @@ function search() {
   var layers = labs.getLayers();
   // sort by name
   layers.sort(function(a,b){
-    var aa = a.feature.properties.name;
-    var bb = b.feature.properties.name;
+    var aa = a.feature.properties.name.toLowerCase();
+    var bb = b.feature.properties.name.toLowerCase();
     if (aa<bb) return -1;
     if (aa>bb) return 1;
     return 0;

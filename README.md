@@ -12,68 +12,72 @@ http://mapping.cit.cornell.edu/publiclabs/map/
 
 ## Data for the map
 
-Proposed attributes for each lab:
+Each lab will be a GeoJSON point feature with the following properties:
 
 | attribute | description | example |
 | - | - | - |
-| coordinates | point longitude, latitude | [-76.476471, 42.448915] |
-| name | common name of the lab | Mann B30A Classroom |
-| building | where the lab is located | Mann Library |
-| url | website URL | https://mannlib.cornell.edu/use/spaces/all/b30a |
-| hours | text or link for opening hours | Open 24/7<br>http://mannlib.cornell.edu/hours |
-| access | who can access the lab | public<br>restricted to AAP students |
-| description | about the lab | 44 Dell Desktops |
-| os | operating system(s) | Windows 10<br>Mac<br>macOS 10.4 Mojave |
-| admin | who runs the lab | CU Library<br>CIT |
-| software | names of sofware package available (versions optional) | Adobe Photoshop<br>QGIS<br>QGIS 3.2 |
+| id | unique text string (from old system, where applicable) | "801" |
+| name | common name of the lab | "Mann B30A Classroom" |
+| building | building where the lab is located | Mann Library |
+| url | website URL | "https://mannlib.cornell.edu/use/spaces/all/b30a" |
+| hours | text or link for opening hours | "Open 24/7"<br>"http://mannlib.cornell.edu/hours" |
+| access | who can access the lab | "public"<br>"restricted to AAP students" |
+| admin | who runs the lab | "CU Library"<br>"CIT" |
+| os | operating system(s) | "Windows 10"<br>"Mac"<br>"macOS 10.4 Mojave" |
+| description | about the lab | "44 Dell Desktops"<br>"Located in the basement level of Olin Library" |
+| printing | available printing options | "Net-Print Black & White"<br>"Net-Print Black & White, Net-Print Color" |
+| software | names of sofware package available (version optional) | "Adobe Photoshop"<br>"Microsoft Word 2016"<br>"QGIS"<br>"QGIS 3.2.1" |
 
 Here's an example of how this might look as GeoJSON:
 
 ```json
 {
   "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [ -76.485659, 42.446652 ]
+  },
   "properties": {
-    "id": 793,
+    "id": "793",
     "name": "Willard Straight CIT Lab",
     "building": "Willard Straight Hall",
     "hours": "Open During Normal Building Hours.",
     "access": "public",
     "admin": "CIT",
     "os": "Windows",
-    "description": "7 Dell Optiplex 990<br>Intel Core i7 Core-2600<br>3.4 Ghz / 4 Gb Ram<br>CD/DVD RW",
+    "description": "7 Dell Optiplex 990 <br> Intel Core i7 Core-2600 <br> 3.4 Ghz / 4 GB Ram <br> CD/DVD RW<br><br>Also Macs with OS Yosemite, Adobe Creative Cloud, Microsoft Office 2016, and Final Cut Pro X",
+    "printing": "Net-Print Black & White, Net-Print Color",
     "software": [
       "Adobe Acrobat Distiller",
-      "Adobe Acrobat Professional",
+      "Adobe Acrobat Pro",
+      "Adobe Creative Cloud",
       "Adobe Media Player",
       "Audacity",
+      "Autodesk",
       "Dr. Java",
+      "Eclipse",
       "Google Earth",
-      "Google Sketchup",
-      "Microsoft Access",
-      "Microsoft Excel",
+      "Microsoft Access 2016",
+      "Microsoft Excel 2016",
       "Microsoft InfoPath",
-      "Microsoft OneNote",
-      "Microsoft PowerPoint",
-      "Microsoft Publisher",
-      "Microsoft Word",
-      "Miktex",
+      "Microsoft OneNote 2016",
+      "Microsoft PowerPoint 2016",
+      "Microsoft Publisher 2016",
+      "Microsoft Word 2016",
+      "MiKTeX",
       "Minitab",
-      "Net-Print Black and White",
-      "Net-Print Color",
       "Netbeans IDE",
       "Premier AT",
       "Refworks",
       "Scanner",
+      "SketchUp",
       "SSH Secure Shell",
-      "Windows Media Player"
+      "Stella",
+      "Windows Media Player",
+      "VideoLAN"
     ]
-  },
-  "geometry": {
-    "type": "Point",
-    "coordinates": [ -76.485659, 42.446652 ]
   }
 }
-
 ```
 
 

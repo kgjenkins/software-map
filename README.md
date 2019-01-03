@@ -18,9 +18,9 @@ Each lab will be a GeoJSON point feature with the following properties:
 | - | - | - |
 | id | unique text string (from old system, where applicable) | "801" |
 | name | common name of the lab | "Mann B30A Classroom" |
-| building | building where the lab is located | Mann Library |
-| url | website URL | "https://mannlib.cornell.edu/use/spaces/all/b30a" |
-| hours | text or link for opening hours | "Open 24/7"<br>"http://mannlib.cornell.edu/hours" |
+| building | building where the lab is located | "Mann Library" |
+| url | website URL | `"https://mannlib.cornell.edu/use/spaces/all/b30a"` |
+| hours | text or link for opening hours | "Open 24/7"<br>`"http://mannlib.cornell.edu/hours"` |
 | access | who can access the lab | "public"<br>"restricted to AAP students" |
 | admin | who runs the lab | "CU Library"<br>"CIT" |
 | os | operating system(s) | "Windows 10"<br>"Mac"<br>"macOS 10.4 Mojave" |

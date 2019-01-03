@@ -3,6 +3,10 @@
   "features": [
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.475923, 42.448822 ]
+      },
       "properties": {
         "id": "801",
         "name": "Mann Library B30B classroom",
@@ -102,14 +106,14 @@
           "VLC Media Player",
           "Vortex 10.8.2"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.475923, 42.448822 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.475923, 42.448712 ]
+      },
       "properties": {
         "id": "803",
         "name": "Mann Library B30A classroom",
@@ -209,14 +213,14 @@
           "VLC Media Player",
           "Vortex 10.8.2"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.475923, 42.448712 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.476471, 42.448915 ]
+      },
       "properties": {
         "id": "804",
         "name": "Mann Library Stone classroom",
@@ -316,14 +320,14 @@
           "VLC Media Player",
           "Vortex 10.8.2"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.476471, 42.448915 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.476101, 42.448935 ]
+      },
       "properties": {
         "id": "805",
         "name": "Mann Library research computers",
@@ -423,14 +427,14 @@
           "VLC Media Player",
           "Vortex 10.8.2"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.476101, 42.448935 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.485053, 42.447635 ]
+      },
       "properties": {
         "id": "998",
         "name": "Uris Library Tower Room",
@@ -470,14 +474,14 @@
           "Stella",
           "Tableau"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.485053, 42.447635 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.485659, 42.446652 ]
+      },
       "properties": {
         "id": "793",
         "name": "Willard Straight CIT Lab",
@@ -517,14 +521,14 @@
           "Windows Media Player",
           "VideoLAN"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.485659, 42.446652 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.476335, 42.448655 ]
+      },
       "properties": {
         "id": "999w",
         "name": "Mann Library Circ Dell laptops",
@@ -565,14 +569,14 @@
           "STATA 15",
           "VLC Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.476335, 42.448655 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.476198, 42.448655 ]
+      },
       "properties": {
         "id": "999m",
         "name": "Mann Library Circ Macbook Pros",
@@ -607,14 +611,14 @@
           "VLC Media Player",
           "Xcode"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.476198, 42.448655 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.484147, 42.450935 ]
+      },
       "properties": {
         "id": "758",
         "name": "Fine Arts Library",
@@ -682,14 +686,14 @@
           "VLC Media Player",
           "Windows 10 Enterprise"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.484147, 42.450935 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.482173, 42.45737 ]
+      },
       "properties": {
         "id": "759",
         "name": "Africana Library",
@@ -757,14 +761,14 @@
           "VLC Media Player",
           "Windows 10 Enterprise"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.482173, 42.45737 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.48004, 42.448341 ]
+      },
       "properties": {
         "id": "761",
         "name": "Math Library",
@@ -832,14 +836,14 @@
           "VLC Media Player",
           "Windows 10 Enterprise"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.48004, 42.448341 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.485366, 42.447729 ]
+      },
       "properties": {
         "id": "755",
         "name": "Uris Library",
@@ -907,14 +911,14 @@
           "VLC Media Player",
           "Windows 10 Enterprise"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.485366, 42.447729 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.483563, 42.449977 ]
+      },
       "properties": {
         "id": "753",
         "name": "Music Library",
@@ -983,14 +987,14 @@
           "VLC Media Player",
           "Windows 10 Enterprise"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.483563, 42.449977 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.485842, 42.443976 ]
+      },
       "properties": {
         "id": "764",
         "name": "Law Library",
@@ -1074,14 +1078,14 @@
           "Windows 10 Enterprise",
           "Windows Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.485842, 42.443976 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.483181, 42.445995 ]
+      },
       "properties": {
         "id": "762",
         "name": "Management Library",
@@ -1164,14 +1168,14 @@
           "Windows 7 Enterprise",
           "Windows Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.483181, 42.445995 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.48386, 42.447977 ]
+      },
       "properties": {
         "id": "757",
         "name": "Kroch Library",
@@ -1253,14 +1257,14 @@
           "Windows 10 Enterprise",
           "Windows Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.48386, 42.447977 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.484671, 42.447781 ]
+      },
       "properties": {
         "id": "752",
         "name": "Olin Library",
@@ -1345,14 +1349,14 @@
           "Windows 10 Enterprise",
           "Windows Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.484671, 42.447781 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.484671, 42.447781 ]
+      },
       "properties": {
         "id": "752",
         "name": "Olin Library Maps",
@@ -1439,14 +1443,14 @@
           "Windows 10 Enterprise",
           "Windows Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.484671, 42.447781 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.480345, 42.447 ]
+      },
       "properties": {
         "id": "787",
         "name": "Catherwood Library",
@@ -1526,14 +1530,14 @@
           "Windows 10 Enterprise",
           "Windows Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.480345, 42.447 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.485261, 42.447816 ]
+      },
       "properties": {
         "id": "727",
         "name": "Uris Library CL3",
@@ -1623,14 +1627,14 @@
           "Windows Media Player",
           "WinSCP"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.485261, 42.447816 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.485263, 42.44758 ]
+      },
       "properties": {
         "id": "795",
         "name": "Uris Classroom",
@@ -1676,14 +1680,14 @@
           "Tableau",
           "WindowEyes"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.485263, 42.44758 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.478368, 42.447735 ]
+      },
       "properties": {
         "id": "1017",
         "name": "Academic Surge B",
@@ -1720,14 +1724,14 @@
           "SSH Secure Shell",
           "Stella"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.478368, 42.447735 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.482238, 42.444443 ]
+      },
       "properties": {
         "id": "746",
         "name": "Phillips Hall CIT Lab",
@@ -1788,14 +1792,14 @@
           "Tableau",
           "Windows Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.482238, 42.444443 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.482483, 42.444033 ]
+      },
       "properties": {
         "id": "1043",
         "name": "Upson CIT Lab",
@@ -1855,14 +1859,14 @@
           "Stella",
           "Tableau"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.482483, 42.444033 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.484212, 42.444809 ]
+      },
       "properties": {
         "id": "1032",
         "name": "ACCEL - Red Room",
@@ -1928,14 +1932,14 @@
           "STK",
           "Tableau Public"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.484212, 42.444809 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.48424, 42.444803 ]
+      },
       "properties": {
         "id": "1031",
         "name": "ACCEL - Orange Room",
@@ -2004,14 +2008,14 @@
           "STK",
           "Tableau Public"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.48424, 42.444803 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.484306, 42.444797 ]
+      },
       "properties": {
         "id": "997",
         "name": "ACCEL - Blue Room",
@@ -2074,14 +2078,14 @@
           "Stella",
           "Tableau"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.484306, 42.444797 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.484269, 42.444799 ]
+      },
       "properties": {
         "id": "1030",
         "name": "ACCEL - Green Room",
@@ -2145,14 +2149,14 @@
           "Stella",
           "Tableau"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.484269, 42.444799 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.484149, 42.444741 ]
+      },
       "properties": {
         "id": "1015",
         "name": "ACCEL - Sunset Room",
@@ -2214,14 +2218,14 @@
           "Stella",
           "Tableau"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.484149, 42.444741 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.485143, 42.447721 ]
+      },
       "properties": {
         "id": "1042",
         "name": "Uris Library Kiosks",
@@ -2233,14 +2237,14 @@
         "description": "In the Austen Room, 14 Optiplex 980",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.485143, 42.447721 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.489618, 42.448407 ]
+      },
       "properties": {
         "id": "1006",
         "name": "Carl Becker House",
@@ -2255,14 +2259,14 @@
           "Office 2016",
           "Adobe CC"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.489618, 42.448407 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.489496, 42.446719 ]
+      },
       "properties": {
         "id": "1004",
         "name": "Keeton House",
@@ -2287,14 +2291,14 @@
           "Minitab",
           "Office 2016"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.489496, 42.446719 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.488518, 42.44703 ]
+      },
       "properties": {
         "id": "1005",
         "name": "McFaddin Hall",
@@ -2319,14 +2323,14 @@
           "Minitab",
           "Office 2016"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.488518, 42.44703 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.488801, 42.447793 ]
+      },
       "properties": {
         "id": "1008",
         "name": "Flora Rose House",
@@ -2352,14 +2356,14 @@
           "Minitab",
           "Office 2016"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.488801, 42.447793 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.489611, 42.448981 ]
+      },
       "properties": {
         "id": "1007",
         "name": "Alice Cook House",
@@ -2384,14 +2388,14 @@
           "Minitab",
           "Office 2016"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.489611, 42.448981 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.479173, 42.449259 ]
+      },
       "properties": {
         "id": "1041",
         "name": "OADI",
@@ -2403,14 +2407,14 @@
         "description": "Located in 200 CCC",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.479173, 42.449259 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.477418, 42.455967 ]
+      },
       "properties": {
         "id": "800",
         "name": "RPCC CIT Lab",
@@ -2456,14 +2460,14 @@
           "Stella",
           "Windows Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.477418, 42.455967 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.47613, 42.45364 ]
+      },
       "properties": {
         "id": "792",
         "name": "Appel CIT Lab",
@@ -2501,14 +2505,14 @@
           "VideoLAN",
           "Windows Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.47613, 42.45364 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.484179, 42.443524 ]
+      },
       "properties": {
         "id": "1038",
         "name": "MAE 101A Thurston Hall",
@@ -2520,14 +2524,14 @@
         "description": "",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.484179, 42.443524 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.484247, 42.443519 ]
+      },
       "properties": {
         "id": "1040",
         "name": "MAE 103 Thurston Hall",
@@ -2539,14 +2543,14 @@
         "description": "",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.484247, 42.443519 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.484319, 42.443456 ]
+      },
       "properties": {
         "id": "1037",
         "name": "MAE 101 Thurston Hall",
@@ -2558,14 +2562,14 @@
         "description": "",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.484319, 42.443456 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.48419, 42.443429 ]
+      },
       "properties": {
         "id": "1039",
         "name": "MAE 102A Thurston Hall",
@@ -2577,14 +2581,14 @@
         "description": "",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.48419, 42.443429 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.482576, 42.443986 ]
+      },
       "properties": {
         "id": "1035",
         "name": "MAE Wind Tunnel",
@@ -2596,14 +2600,14 @@
         "description": "",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.482576, 42.443986 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.481633, 42.443342 ]
+      },
       "properties": {
         "id": "1026",
         "name": "MAE 114 Rhodes Hall",
@@ -2615,14 +2619,14 @@
         "description": "",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.481633, 42.443342 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.48162, 42.443348 ]
+      },
       "properties": {
         "id": "1027",
         "name": "MAE 116 Rhodes Hall",
@@ -2634,14 +2638,14 @@
         "description": "Emerson?",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.48162, 42.443348 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.481645, 42.443342 ]
+      },
       "properties": {
         "id": "1028",
         "name": "MAE 169 Rhodes Hall",
@@ -2652,14 +2656,14 @@
         "description": "",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.481645, 42.443342 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.481635, 42.443335 ]
+      },
       "properties": {
         "id": "1029",
         "name": "MAE 155 Rhodes Hall",
@@ -2671,14 +2675,14 @@
         "description": "",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.481635, 42.443335 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.481658, 42.443334 ]
+      },
       "properties": {
         "id": "1024",
         "name": "MAE 106 Rhodes Hall",
@@ -2690,14 +2694,14 @@
         "description": "",
         "software": [
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.481658, 42.443334 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.457853, 42.442846 ]
+      },
       "properties": {
         "id": "760",
         "name": "Library Annex",
@@ -2732,14 +2736,14 @@
           "Windows Internet Explorer 11",
           "Windows Media Player"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.457853, 42.442846 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.480173, 42.452167 ]
+      },
       "properties": {
         "id": "802",
         "name": "Language Resource Center",
@@ -2758,14 +2762,14 @@
           "Safari",
           "Web Audio Lab (in 12 languages)"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ -76.480173, 42.452167 ]
       }
     },
     {
       "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ 0, 0 ]
+      },
       "properties": {
         "id": "9999",
         "name": "CISER Computing Accounts",
@@ -2810,10 +2814,6 @@
           "TortoiseSVN",
           "Visual Studio 2008 C++"
         ]
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [ 0, 0 ]
       }
     }
   ]

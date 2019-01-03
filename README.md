@@ -12,7 +12,7 @@ http://mapping.cit.cornell.edu/publiclabs/map/
 
 ## Data for the map
 
-Each lab will be a GeoJSON point feature with the following properties:
+Each lab is represented as a GeoJSON point feature with the following properties:
 
 | attribute | description | example |
 | - | - | - |
@@ -28,56 +28,116 @@ Each lab will be a GeoJSON point feature with the following properties:
 | printing | available printing options | "Net-Print Black & White"<br>"Net-Print Black & White, Net-Print Color" |
 | software | names of sofware package available (version optional) | "Adobe Photoshop"<br>"Microsoft Word 2016"<br>"QGIS"<br>"QGIS 3.2.1" |
 
-Here's an example of how this might look as GeoJSON:
+Here's an example:
 
 ```json
 {
   "type": "Feature",
   "geometry": {
     "type": "Point",
-    "coordinates": [ -76.485659, 42.446652 ]
+    "coordinates": [ -76.475923, 42.448822 ]
   },
   "properties": {
-    "id": "793",
-    "name": "Willard Straight CIT Lab",
-    "building": "Willard Straight Hall",
-    "hours": "Open During Normal Building Hours.",
+    "id": "801",
+    "name": "Mann Library B30B classroom",
+    "building": "Mann Library",
+    "url": "https://mannlib.cornell.edu/use/spaces/all/b30b",
+    "hours": "http://mannlib.cornell.edu/hours",
     "access": "public",
-    "admin": "CIT",
+    "admin": "CU Library",
     "os": "Windows",
-    "description": "7 Dell Optiplex 990 <br> Intel Core i7 Core-2600 <br> 3.4 Ghz / 4 GB Ram <br> CD/DVD RW<br><br>Also Macs with OS Yosemite, Adobe Creative Cloud, Microsoft Office 2016, and Final Cut Pro X",
+    "description": "31 Dell desktops",
     "printing": "Net-Print Black & White, Net-Print Color",
     "software": [
-      "Adobe Acrobat Distiller",
-      "Adobe Acrobat Pro",
-      "Adobe Creative Cloud",
-      "Adobe Media Player",
-      "Audacity",
-      "Autodesk",
-      "Dr. Java",
-      "Eclipse",
-      "Google Earth",
+      "7-Zip",
+      "Adobe Acrobat DC",
+      "Adobe After Effects",
+      "Adobe Animate",
+      "Adobe Audition",
+      "Adobe Bridge",
+      "Adobe Dreamweaver",
+      "Adobe Fireworks",
+      "Adobe Flash Builder",
+      "Adobe Flash",
+      "Adobe Illustrator",
+      "Adobe InCopy",
+      "Adobe InDesign",
+      "Adobe Lightroom",
+      "Adobe Media Encoder",
+      "Adobe Muse",
+      "Adobe Photoshop",
+      "Adobe Prelude",
+      "Adobe Premier Pro",
+      "Adobe Speed Grade 2015",
+      "Anaconda",
+      "ArcGIS Desktop (ArcMap) 10.5.1",
+      "ArcGIS Pro 2.2",
+      "Artemis",
+      "Autodesk (AutoCAD) 2019",
+      "CBGP - GeneClass2",
+      "Corpscon",
+      "Density 5",
+      "Distance 7.1",
+      "DNRGPS",
+      "EasyPop",
+      "EndNote X8",
+      "Evernote",
+      "FileZilla",
+      "Firefox",
+      "GenePOP",
+      "Git for Windows",
+      "GitHub Desktop",
+      "Google Chrome",
+      "Google Earth Pro",
+      "Internet Explorer 11",
+      "Inverse 3D-Forward 3D",
+      "Java",
+      "JAWS",
+      "JMP 14",
+      "MARK 8.2",
+      "Mauve",
+      "Maxima 5.40.0",
+      "MEGA 7",
       "Microsoft Access 2016",
+      "Microsoft Edge",
       "Microsoft Excel 2016",
-      "Microsoft InfoPath",
       "Microsoft OneNote 2016",
       "Microsoft PowerPoint 2016",
       "Microsoft Publisher 2016",
+      "Microsoft Silverlight",
       "Microsoft Word 2016",
-      "MiKTeX",
-      "Minitab",
-      "Netbeans IDE",
-      "Premier AT",
-      "Refworks",
-      "Scanner",
-      "SketchUp",
-      "SSH Secure Shell",
-      "Stella",
-      "Windows Media Player",
-      "VideoLAN"
+      "MiKTeX 2.9",
+      "NED-2",
+      "NEURON 7.4",
+      "Notepad++",
+      "OpenBUGS",
+      "Photoshop (Adobe)",
+      "PMP7",
+      "Populus",
+      "Premier Literacy Suite 32 Bit",
+      "PSPP",
+      "PuTTY",
+      "Python",
+      "QGIS 3.2.1",
+      "R 3.5.1",
+      "RealPlayer",
+      "Rhino 5",
+      "RStudio 1.1.453",
+      "RUSLE2",
+      "SAP Lumira",
+      "SAPGUI",
+      "SheepSim",
+      "SketchUp 2017",
+      "Stata 15",
+      "Stella Professional 1.4.1",
+      "Stewplan 1.2",
+      "Tropcrop 2.40",
+      "Vensim Model Reader",
+      "Vensim PLE",
+      "VLC Media Player",
+      "Vortex 10.8.2"
     ]
   }
 }
 ```
-
 

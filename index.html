@@ -14,6 +14,8 @@
 body { font-family:"Segoe UI", Roboto, Arial, sans-serif }
 
 h1 { margin:0 0 0.5em }
+h1 a { text-decoration:none ; color:#b31b1b ! important }
+h1 a:hover { color:#d31b1b ! important }
 
 #search { width:25% ; float:left ; padding:0 1% }
 #q { width:16em }
@@ -40,8 +42,8 @@ h1 { margin:0 0 0.5em }
 
 <body>
 <div id='search'>
-  <h1>Cornell Software Map</h1>
-  <form onsubmit='search()'>
+  <h1><a href='#' id='home'>Cornell Software Map</a></h1>
+  <form id='searchform'>
     Search: for software at Cornell:<br>
     <input id='q' />
     <button type='submit'>search</button>
@@ -52,15 +54,21 @@ h1 { margin:0 0 0.5em }
 <div id='map'></div>
 <script>
 
+document.getElementById('home').onclick = home;
+document.getElementById('searchform').onsubmit = submitSearch;
+document.onkeyup = function(e) {
+  if (e.key=='Escape') {
+    clear_info();
+  }
+}
+
 // fadeAnimation:false is recommended for grayscale tilelayer, otherwise it may flicker
 var map = L.map('map', { fadeAnimation:false })
-  .on('click', function(e) {
-    console.log(e.latlng);
-  })
+  //.on('click', function(e) { console.log(e.latlng); })
   .setMaxBounds([[42.4328,-76.4996], [42.4674,-76.4478]]);
 
 // use a openstreetmap basemap
-var osm = L.tileLayer.colorFilter('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+var osm = L.tileLayer.colorFilter('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
   maxZoom: 19,
   minZoom: 14,
   opacity: 1,
@@ -103,17 +111,23 @@ var customLayer = L.geoJson(null, {
 
 var labs = omnivore.geojson('labs.geojson', null, customLayer)
   .on('ready', function() {
+    // once we have all the data...
     initAutocomplete(this.getLayers());
+    search(''); // interpretHash won't display points unless we start by searching for everything
+    interpretHash();
   })
   .addTo(map);
 
-document.onkeyup = function(e) {
-  if (e.key=='Escape') {
-    clear_info();
-  }
+console.log(labs);
+
+
+function escapeRegExp(text) {
+  return text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
+
 function initAutocomplete(layers) {
+  console.log('initAutocomplete...');
   // build a list of all software, and use it to provide
   // autocomplete for the search box
   var all_software = [];
@@ -135,38 +149,50 @@ function initAutocomplete(layers) {
     return 0;
   });
 
-  console.log(all_software);
+  //console.log(all_software);
   // add the autocomplete to the search box
   var q = document.getElementById('q');
   new Awesomplete(q, {
     list: all_software,
     minChars: 1,
     filter: function (text, qterm) {
-      var re = new RegExp('\\b'+qterm, 'i');
-      return text.match(re);
+      var re = new RegExp('\\b' + escapeRegExp(qterm), 'i');
+      return re.test(text);
     },
     autoFirst: false
   });
   // execute the search whenever the input changes
-  q.addEventListener('awesomplete-selectcomplete', search);
+  q.addEventListener('awesomplete-selectcomplete', submitSearch);
   //q.oninput = search;
   //q.onkeyup = search; // just in case the browser doesn't support oninput
   q.focus();
   //interpretHash();
-  search();
+  //search();
 }
 
 
 function interpretHash() {
-  return; // TODO this doesn't work yet
-
   // automatically search for terms in the URL hash,
-  // so that links to specific searches can be shared by URL
-  var hash = location.hash.replace(/^#/, '');
-  // TODO unescaping may be necessary for firefox
+  // so that links to specific searches or features can be shared by URL
+  var hash = location.hash;
+
+  // unescape hash
+  hash = unescape(hash).replace(/\+/g, ' ');
+
   document.title += ': ' + hash;
-  document.getElementById('q').value = hash;
-  search();
+
+  // escaped slashes are part of the query term, so don't split on double-slashes
+  var params = hash.split(/(?<!\/)\/(?!\/)/);
+  var q = params[1].replace('//', '/'); // convert escaped slashes back to single slashes
+  var id = params[2];
+
+  if (q === undefined) {
+    q = '';
+  }
+
+  document.getElementById('q').value = q;
+  document.getElementById('q').innerHTML = q;
+  search(q, id);
 }
 
 
@@ -219,12 +245,35 @@ function clear_info() {
   });
 }
 
-function search(e) {
-  console.log(e);
-  var qterm = document.getElementById('q').value.trim();
-  location.hash = qterm;
-  // note that query term must match beginning of a word
-  var re = new RegExp('\\b'+qterm, 'i');
+function encodeHash(h) {
+  // escape slashes with // and keep + : =
+  h = escape(h.replace(/\//g, '//'))
+    .replace(/%20/g, '+')
+    .replace(/%3A/g, ':')
+    .replace(/%3D/g, '=');
+  return h;
+}
+
+function home() {
+  location.hash = '/';
+  interpretHash();
+}
+
+function submitSearch(e) {
+  e.preventDefault();
+  e.returnValue = '';
+  console.log('submitting search...');
+  var q = document.getElementById('q').value.trim();
+  location.hash = '/' + encodeHash(q);
+  search(q);
+  return false;
+}
+
+function search(q, showid) {
+  // showid is optional, and will show details for that result
+  console.log('searching for... ' + q);
+  // note that query must match beginning of a word
+  var re = new RegExp('\\b' + escapeRegExp(q), 'i');
   var layers = labs.getLayers();
   // sort by name
   layers.sort(function(a,b){
@@ -254,9 +303,10 @@ function search(e) {
         bounds.extend(item.getLatLng());
       }
 
+      var id = item.feature.properties.id;
       var name = item.feature.properties.name;
       var li = document.createElement('li');
-      li.innerHTML = '<a href="#">'+name+'</a>';
+      li.innerHTML = '<a href="#/' + encodeHash(q) + '/' + encodeHash(id) + '">'+name+'</a>';
       var a = li.firstChild;
 
       // link to marker on map
@@ -269,7 +319,7 @@ function search(e) {
         var id = e.target.getAttribute('data');
         layers[id].closeTooltip();
       }
-      a.onclick = a.onfocus = function(e){
+      a.onclick = function(e){
         var id = e.target.getAttribute('data');
 
         var item = layers[id];
@@ -280,8 +330,14 @@ function search(e) {
           map.panTo(ll);
         }
       }
+      a.onfocus = function(e){
+        e.target.click();
+      }
 
       results.appendChild(li);
+      if (id === showid) {
+        a.focus();
+      }
     }
     else {
       item.remove();
@@ -296,7 +352,6 @@ function search(e) {
   if (bounds.isValid()) {
     map.fitBounds(bounds.pad(0.03));
   }
-  return false;
 }
 
 </script>

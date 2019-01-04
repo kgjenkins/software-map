@@ -179,17 +179,18 @@ function interpretHash() {
   // unescape hash
   hash = unescape(hash).replace(/\+/g, ' ');
 
-  document.title += ': ' + hash;
-
   // escaped slashes are part of the query term, so don't split on double-slashes
   var params = hash.split(/(?<!\/)\/(?!\/)/);
-  var q = params[1].replace('//', '/'); // convert escaped slashes back to single slashes
+  var q = params[1];
+  if (q) q = q.replace('//', '/'); // convert escaped slashes back to single slashes
   var id = params[2];
 
   if (q === undefined) {
     q = '';
+    id = hash.split('/')[2];
   }
 
+  document.title += ': ' + q + ' / ' + id;
   document.getElementById('q').value = q;
   document.getElementById('q').innerHTML = q;
   search(q, id);
@@ -231,6 +232,7 @@ function show_info(layer) {
   }
   html += '</table>';
   document.getElementById('info').innerHTML = html;
+  document.title = 'Cornell Software Map: ' + p.name;
 
   // highlight this marker
   layer.bringToFront().setStyle({fillColor:'#ff0', color:'#000', radius:12});
@@ -262,20 +264,21 @@ function home() {
 function submitSearch(e) {
   e.preventDefault();
   e.returnValue = '';
-  console.log('submitting search...');
   var q = document.getElementById('q').value.trim();
   location.hash = '/' + encodeHash(q);
+  document.title = 'Cornell Software Map: ' + q;
   search(q);
   return false;
 }
 
 function search(q, showid) {
   // showid is optional, and will show details for that result
-  console.log('searching for... ' + q);
-  // note that query must match beginning of a word
+
+  // query must match beginning of a word
   var re = new RegExp('\\b' + escapeRegExp(q), 'i');
+
+  // sort layers by name
   var layers = labs.getLayers();
-  // sort by name
   layers.sort(function(a,b){
     var aa = a.feature.properties.name.toLowerCase();
     var bb = b.feature.properties.name.toLowerCase();
@@ -283,9 +286,9 @@ function search(q, showid) {
     if (aa>bb) return 1;
     return 0;
   });
-  var results = document.getElementById('results');
 
   // reset results
+  var results = document.getElementById('results');
   results.innerHTML = '';
   clear_info();
 

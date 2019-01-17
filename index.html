@@ -179,8 +179,13 @@ function interpretHash() {
   // unescape hash
   hash = unescape(hash).replace(/\+/g, ' ');
 
-  // escaped slashes are part of the query term, so don't split on double-slashes
-  var params = hash.split(/(?<!\/)\/(?!\/)/);
+  // escaped slashes are part of the query term, so we need to be careful
+  // not to split on double-slashes
+  var params = hash.split("/");
+  if (params.length == 4) {
+    params[2] = params[3];
+  }
+
   var q = params[1];
   if (q) q = q.replace('//', '/'); // convert escaped slashes back to single slashes
   var id = params[2];
@@ -225,7 +230,7 @@ function show_info(layer) {
 
     // use html list for software values
     if (property=='software' && value.length>0) {
-      value= '<ul><li>' + p.software.join('</li><li>') + '</li></ul>';
+      value= '<ul><li>' + value.join('</li><li>') + '</li></ul>';
     }
 
     html += '<tr><th>'+property+':</th><td>' + value + '</td></tr>';

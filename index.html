@@ -97,9 +97,14 @@ var customLayer = L.geoJson(null, {
   },
   onEachFeature: function(feature, layer) {
     // calculate fulltext for searching
-    var f = '';
+    var f = ' ';
     for (p in feature.properties) {
-      f += ' ' + feature.properties[p];
+      var v = feature.properties[p];
+      // put space between multivalues
+      if (v && typeof(v)==="object") {
+        v = v.join(' ');
+      }
+      f += v + ' ';
     }
     feature.properties.fulltext = f;
     layer.bindTooltip(feature.properties.name, {direction:'right'});
@@ -122,7 +127,8 @@ console.log(labs);
 
 
 function escapeRegExp(text) {
-  return text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  // note that we don't escape .
+  return text.replace(/[-\/\\^$*+?()|[\]{}]/g, '\\$&');
 }
 
 
@@ -179,13 +185,10 @@ function interpretHash() {
   // unescape hash
   hash = unescape(hash).replace(/\+/g, ' ');
 
-  // escaped slashes are part of the query term, so we need to be careful
-  // not to split on double-slashes
-  hash = hash.replace(/\/\//g, "DOUBLESLASH");
   var params = hash.split("/");
+  console.log(params);
 
-  var q = params[1].replace("DOUBLESLASH", "/");
-  if (q) q = q.replace('//', '/'); // convert escaped slashes back to single slashes
+  var q = params[1];
   var id = params[2];
 
   if (q === undefined) {
@@ -251,8 +254,8 @@ function clear_info() {
 }
 
 function encodeHash(h) {
-  // escape slashes with // and keep + : =
-  h = escape(h.replace(/\//g, '//'))
+  // replace slashes with . and keep + : =
+  h = escape(h.replace(/\//g, '.'))
     .replace(/%20/g, '+')
     .replace(/%3A/g, ':')
     .replace(/%3D/g, '=');
@@ -276,6 +279,14 @@ function submitSearch(e) {
 
 function search(q, showid) {
   // showid is optional, and will show details for that result
+
+  // special handling for "R"
+  if (q==='r' || q==='R') {
+    q += ' ';
+  }
+
+  // replace slashes with space
+  q = q.replace(/\//g, '.');
 
   // query must match beginning of a word
   var re = new RegExp('\\b' + escapeRegExp(q), 'i');

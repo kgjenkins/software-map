@@ -2645,6 +2645,7 @@
         "building": "Rhodes Hall",
         "hours": "Open 24/7",
         "access": "restricted to key card access only",
+        "admin": "CIT",
         "os": "Windows",
         "description": "",
         "software": [

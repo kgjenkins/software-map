@@ -181,12 +181,10 @@ function interpretHash() {
 
   // escaped slashes are part of the query term, so we need to be careful
   // not to split on double-slashes
+  hash = hash.replace(/\/\//g, "DOUBLESLASH");
   var params = hash.split("/");
-  if (params.length == 4) {
-    params[2] = params[3];
-  }
 
-  var q = params[1];
+  var q = params[1].replace("DOUBLESLASH", "/");
   if (q) q = q.replace('//', '/'); // convert escaped slashes back to single slashes
   var id = params[2];
 

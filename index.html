@@ -123,7 +123,6 @@ var labs = omnivore.geojson('labs.geojson', null, customLayer)
   })
   .addTo(map);
 
-console.log(labs);
 
 
 function escapeRegExp(text) {
@@ -133,7 +132,6 @@ function escapeRegExp(text) {
 
 
 function initAutocomplete(layers) {
-  console.log('initAutocomplete...');
   // build a list of all software, and use it to provide
   // autocomplete for the search box
   var all_software = [];
@@ -155,7 +153,6 @@ function initAutocomplete(layers) {
     return 0;
   });
 
-  //console.log(all_software);
   // add the autocomplete to the search box
   var q = document.getElementById('q');
   new Awesomplete(q, {
@@ -186,8 +183,6 @@ function interpretHash() {
   hash = unescape(hash).replace(/\+/g, ' ');
 
   var params = hash.split("/");
-  console.log(params);
-
   var q = params[1];
   var id = params[2];
 

@@ -2763,7 +2763,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [ null, null ]
+        "coordinates": [ 0, 0 ]
       },
       "properties": {
         "id": "9999",

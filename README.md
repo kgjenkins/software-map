@@ -1,3 +1,6 @@
+# SEE https://github.com/cul-it/campus-software-map
+
+
 # software-map
 
 A prototype replacement for Cornell's public computer lab software map.
